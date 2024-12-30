@@ -42,7 +42,7 @@ public class OrdersDAO implements DAO<Orders> {
     };
 
     public void insert(Orders obj) throws SQLException {
-        System.out.println(
+        System.out.println(Time.now() +
                 MessageFormat.format("new order: product {0}, quantity {1}", obj.getProductID(), obj.getQuantity()));
         int productID = obj.getProductID();
         int quantity = obj.getQuantity();
@@ -50,12 +50,12 @@ public class OrdersDAO implements DAO<Orders> {
         int currentStock = stock - quantity;
 
         if (quantity <= 0) {
-            System.out.println("quantity must be > 0");
+            System.out.println(Time.now() + "quantity must be > 0");
             return;
         }
 
         if (stock < quantity) {
-            System.out.println("not enough stock available");
+            System.out.println(Time.now() + "not enough stock available");
             return;
         }
         try {
@@ -66,14 +66,14 @@ public class OrdersDAO implements DAO<Orders> {
             pstmt.setInt(2, quantity);
             int rowAffected = pstmt.executeUpdate();
             if (rowAffected > 0) {
-                System.out.println("insert order successful");
-                System.out.println("wait update stock: " + currentStock + ", for id: " + productID);
+                System.out.println(Time.now() + "insert order successful");
+                System.out.println(Time.now() + "wait update stock: " + currentStock + ", for id: " + productID);
 
                 productDAO.updateStock(conn, productID, currentStock);
                 conn.commit();
                 conn.setAutoCommit(true);
             } else {
-                System.out.println("insert order error");
+                System.out.println(Time.now() + "insert order error");
                 conn.rollback();
             }
         } catch (SQLException e) {
@@ -90,10 +90,10 @@ public class OrdersDAO implements DAO<Orders> {
     };
 
     public void delete(int id) throws SQLException {
-        System.out.println("waiting delete order id: " + id);
+        System.out.println(Time.now() + "waiting delete order id: " + id);
 
         if (id < 0) {
-            System.out.println("id must be > 0");
+            System.out.println(Time.now() + "id must be > 0");
             return;
         }
         // check stock
@@ -108,12 +108,12 @@ public class OrdersDAO implements DAO<Orders> {
                     orderID = order.getId();
                     productID = order.getProductID();
                     quantity = order.getQuantity();
-                    System.out.println("order had product: " + productID + ", quantity: " + quantity);
+                    System.out.println(Time.now() + "order had product: " + productID + ", quantity: " + quantity);
                     break;
                 }
             }
             if (orderID < 0) {
-                System.out.println("order not found" + "\n");
+                System.out.println(Time.now() + "order not found");
                 return;
             }
             stock = productDAO.checkStock(productID);
@@ -125,13 +125,14 @@ public class OrdersDAO implements DAO<Orders> {
             pstmt.setInt(1, id);
 
             if (pstmt.executeUpdate() > 0) {
-                System.out.println("delete order successful");
-                System.out.println("waiting update stock for product: " + productID + ", stock: " + currentStock);
+                System.out.println(Time.now() + "delete order successful");
+                System.out.println(
+                        Time.now() + "waiting update stock");
                 productDAO.updateStock(conn, productID, currentStock);
                 conn.commit();
                 conn.setAutoCommit(true);
             } else {
-                System.out.println("delete order error" + "\n");
+                System.out.println(Time.now() + "delete order error");
                 conn.rollback();
             }
 

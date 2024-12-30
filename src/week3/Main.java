@@ -3,16 +3,16 @@ package week3;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+@SuppressWarnings("unused")
 public class Main<T> {
     public void showData(ArrayList<T> obj, boolean title) {
-        System.out.println(title ? "LIST PRODUCT"
-                : "LIST ORDER");
+        System.out.println(Time.now() + (title ? "list product" : "list order"));
         if (!obj.isEmpty()) {
             for (T item : obj) {
-                System.out.println(item);
+                System.out.println(Time.now() + item);
             }
         } else {
-            System.out.println("empty");
+            System.out.println(Time.now() + "empty");
         }
     }
 

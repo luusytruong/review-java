@@ -73,9 +73,9 @@ public class ProductDAO implements DAO<Product> {
             pstmt.setInt(2, id);
             int rowAffected = pstmt.executeUpdate();
             if (rowAffected > 0) {
-                System.out.println("update stock successful");
+                System.out.println(Time.now() + "update stock successful");
             } else {
-                System.out.println("update stock error");
+                System.out.println(Time.now() + "update stock error");
             }
         } catch (Exception e) {
             e.printStackTrace();
