@@ -1,4 +1,4 @@
-package test_awt;
+package awt;
 
 import javax.swing.*;
 import java.awt.*;

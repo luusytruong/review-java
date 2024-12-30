@@ -1,8 +1,9 @@
-package test_awt;
+package awt;
 
 import java.awt.*;
 import java.awt.event.*;
 
+@SuppressWarnings("serial")
 class NewFrame extends Frame {
     private Button button;
     private Dialog dialog;
