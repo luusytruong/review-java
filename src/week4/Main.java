@@ -8,9 +8,10 @@ import java.awt.event.WindowEvent;
 
 import javax.swing.*;
 
+@SuppressWarnings("unused")
 class MyListenerButton implements ActionListener {
     private JFrame fJFrame;
-    private Button btn1, btn2;
+	private Button btn1, btn2;
 
     public MyListenerButton(JFrame parent, Button _btn1, Button _btn2) {
         fJFrame = parent;
@@ -38,6 +39,7 @@ class MyListenerButton implements ActionListener {
     }
 }
 
+@SuppressWarnings("serial")
 class MyJFrame extends JFrame {
     private Button btn1, btn2;
     private MyListenerButton myListenerButton;

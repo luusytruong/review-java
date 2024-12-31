@@ -1,4 +1,4 @@
-package Transaction;
+package transaction;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

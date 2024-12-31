@@ -2,22 +2,28 @@ package week4;
 
 import java.awt.*;
 import java.awt.event.*;
-
 import javax.swing.*;
 
+@SuppressWarnings("serial")
 class NewJFrame extends JFrame implements ActionListener {
     private Button btnLogin, btnCancel;
     private TextField txtUsername, txtPassword;
-    private Dialog dialog = new Dialog(this, true);
+    private JDialog dialog = new JDialog(this, true);
+    private Label lbDialog = new Label();
+    private GridBagConstraints gbc = new GridBagConstraints();
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == btnLogin) {
-            dialog.add(new Label("button login click!"));
+            lbDialog.setText("Button login clicked!");
+            System.out.println(txtPassword.getText());
         } else {
-            dialog.add(new Label("button cancel click!"));
+            lbDialog.setText("Button cancel clicked!");
         }
+        dialog.add(lbDialog);
         dialog.pack();
+        dialog.setLocationRelativeTo(this);
+        // dialog.setVisible(true);
     }
 
     public NewJFrame(String title) {
@@ -25,43 +31,77 @@ class NewJFrame extends JFrame implements ActionListener {
         initComponents();
     }
 
+    public <T extends Component> void properties(int x, int y, int w, T com,
+            Panel panel) {
+        gbc.gridx = x;
+        gbc.gridy = y;
+        gbc.gridwidth = w;
+        panel.add(com, gbc);
+    }
+
     public void initComponents() {
         // frame
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setLayout(new FlowLayout());
-        // panel username
-        Panel panelUsername = new Panel();
-        panelUsername.setLayout(new FlowLayout());
-        panelUsername.add(new Label("Username"));
-        panelUsername.add(txtUsername = new TextField(20));
-        // panel password
-        Panel panelPassword = new Panel();
-        panelPassword.setLayout(new FlowLayout());
-        panelPassword.add(new Label("Password"));
-        panelPassword.add(txtPassword = new TextField(20));
+        setLayout(new GridBagLayout());
+
+        // layout panel
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+
+        // panel
+        Panel panel = new Panel();
+        panel.setLayout(new GridBagLayout());
+
+        // child
+        Label titleForm = new Label("Login");
+        titleForm.setFont(new Font("", Font.PLAIN, 24));
+        titleForm.setAlignment(Label.CENTER);
+        gbc.gridx = 0;
+        gbc.ipady = 0;
+        gbc.gridwidth = 3;
+        gbc.insets = new Insets(0, 0, 12, 0);
+        panel.add(titleForm, gbc);
+
+        Label lbUsername = new Label("Username");
+        txtUsername = new TextField(20);
+        properties(0, 1, 1, lbUsername, panel);
+        properties(1, 1, 2, txtUsername, panel);
+
+        Label lbPassword = new Label("Password");
+        txtPassword = new TextField(20);
+        properties(0, 2, 1, lbPassword, panel);
+        properties(1, 2, 2, txtPassword, panel);
+
         // panel button
         Panel panelButton = new Panel();
         panelButton.setLayout(new FlowLayout());
         panelButton.add(btnLogin = new Button("Login"));
         panelButton.add(btnCancel = new Button("Cancel"));
-        //event
-        btnLogin.addActionListener(actionPerformed(ActionEvent e));
-        btnCancel.addActionListener(actionPerformed(ActionEvent e));
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        gbc.gridwidth = 3;
+        panel.add(panelButton, gbc);
+
+        // event
+        btnLogin.addActionListener(this);
+        btnCancel.addActionListener(this);
+
+        // properties
+        txtPassword.setEchoChar('•');
+
         // add
-        add(new Label("Login"));
-        add(panelUsername);
-        add(panelPassword);
-        add(panelButton);
+        int padding = 24;
+        gbc.insets = new Insets(12, padding, 0, padding);
+        add(panel, gbc);
+
         // dialog
-        dialog.setTitle("notify");
-        dialog.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                dialog.setVisible(false);
-            }
-        });
+        dialog.setTitle("Notification");
+        dialog.setLayout(new FlowLayout());
+        dialog.setSize(200, 100);
+
+        // finally
         setSize(300, 188);
         setLocationRelativeTo(null);
+        pack();
     }
 }
 
