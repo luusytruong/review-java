@@ -72,7 +72,7 @@ public class LoginJFrame extends JFrame implements ActionListener {
 		tfEmail = new TextField();
 
 		tfPassword = new TextField();
-		tfPassword.setEchoCharacter('*');
+		tfPassword.setEchoCharacter('•');
 
 		btnLogin = new Button("Login now");
 		btnLogin.setBackground(Color.WHITE);
