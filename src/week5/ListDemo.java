@@ -9,6 +9,7 @@ public class ListDemo extends JFrame implements ActionListener, ItemListener {
     private List list1;
     private Button btn1;
     private Label lbShow;
+    // private Font font = new Font("Inter", Font.PLAIN, 14);
 
     @Override
     public void itemStateChanged(ItemEvent e) {
@@ -49,7 +50,7 @@ public class ListDemo extends JFrame implements ActionListener, ItemListener {
 
         this.setContentPane(p1);
 
-        list1 = new List(5, true);
+        list1 = new List(1, true);
         list1.add("ca phe");
         list1.add("banh mi");
         list1.add("mi tom");
@@ -63,8 +64,8 @@ public class ListDemo extends JFrame implements ActionListener, ItemListener {
         lbShow = new Label();
         lbShow.setBackground(Color.LIGHT_GRAY);
 
-        //set bound
-        list1.setBounds(12, 12, 300, 100);
+        // set bound
+        list1.setBounds(12, 12, 300, 19 + 2 * 15);
 
         btn1.setBounds(12, 132, 300, 30);
 

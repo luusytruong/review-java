@@ -60,7 +60,7 @@ public class SimpleNoteApp extends JFrame implements ActionListener {
         this.add(ta, BorderLayout.CENTER);
         this.add(p1, BorderLayout.SOUTH);
 
-        this.setSize(600, 500);
+        this.setSize(400, 300);
         this.setLocationRelativeTo(null);
     }
 }

@@ -4,7 +4,6 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-@SuppressWarnings("serial")
 class NewJFrame extends JFrame implements ActionListener {
     private Button btnLogin, btnCancel;
     private TextField txtUsername, txtPassword;

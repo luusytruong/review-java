@@ -39,7 +39,6 @@ class MyListenerButton implements ActionListener {
     }
 }
 
-@SuppressWarnings("serial")
 class MyJFrame extends JFrame {
     private Button btn1, btn2;
     private MyListenerButton myListenerButton;
