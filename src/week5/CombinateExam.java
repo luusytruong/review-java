@@ -5,7 +5,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
 import java.awt.*;
-import java.awt.event.*;
+// import java.awt.event.*;
 
 public class CombinateExam extends JFrame {
     public CombinateExam(String title) {

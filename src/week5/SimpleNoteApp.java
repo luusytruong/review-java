@@ -16,19 +16,22 @@ public class SimpleNoteApp extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == this.btnSave) {
-            JFileChooser jfc = new JFileChooser();
-            int option = jfc.showSaveDialog(this);
-            if (option == JFileChooser.APPROVE_OPTION) {
-                File file = jfc.getSelectedFile();
-                try (FileWriter writer = new FileWriter(file)) {
-                    writer.write(this.ta.getText());
+            if (ta.getText().isEmpty()) {
+                return;
+            }
+            JFileChooser jFileChooser = new JFileChooser();
+            int optionSave = jFileChooser.showSaveDialog(this);
+            if (optionSave == JFileChooser.APPROVE_OPTION) {
+                File file = jFileChooser.getSelectedFile();
+                try (FileWriter fileWriter = new FileWriter(file)) {
+                    fileWriter.write(ta.getText());
                     JOptionPane.showMessageDialog(this, "Save successful");
                 } catch (IOException ex) {
                     JOptionPane.showMessageDialog(this, ex.getMessage());
                 }
             }
         } else {
-            this.ta.setText("");
+            ta.setText("");
         }
     }
 
@@ -38,13 +41,11 @@ public class SimpleNoteApp extends JFrame implements ActionListener {
     }
 
     public void initComponents() {
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-
         Panel p1 = new Panel();
 
         lb = new Label("Notepad");
-        lb.setAlignment(Label.CENTER);
 
+        lb.setAlignment(Label.CENTER);
         ta = new TextArea();
 
         btnSave = new Button("Save");
@@ -60,6 +61,7 @@ public class SimpleNoteApp extends JFrame implements ActionListener {
         this.add(ta, BorderLayout.CENTER);
         this.add(p1, BorderLayout.SOUTH);
 
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setSize(400, 300);
         this.setLocationRelativeTo(null);
     }

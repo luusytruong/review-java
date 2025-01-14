@@ -13,7 +13,10 @@ public class TextEditorApp extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == this.btn1) {
-            ta.append(tf1.getText() + "\n");
+            if (!tf1.getText().isEmpty()) {
+                ta.append(tf1.getText() + "\n");
+                tf1.setText("");
+            }
         }
     }
 
