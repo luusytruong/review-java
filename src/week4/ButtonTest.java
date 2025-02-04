@@ -40,7 +40,11 @@ class MyListenerButton implements ActionListener {
 }
 
 class MyJFrame extends JFrame {
-    private Button btn1, btn2;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private Button btn1, btn2;
     private MyListenerButton myListenerButton;
 
     public MyJFrame(String title) {

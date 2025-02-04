@@ -5,7 +5,11 @@ import java.awt.event.*;
 import javax.swing.*;
 
 class NewJFrame extends JFrame implements ActionListener {
-    private Button btnLogin, btnCancel;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private Button btnLogin, btnCancel;
     private TextField txtUsername, txtPassword;
     private JDialog dialog = new JDialog(this, true);
     private Label lbDialog = new Label();

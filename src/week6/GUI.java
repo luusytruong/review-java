@@ -2,9 +2,7 @@ package week6;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -18,7 +16,16 @@ public class GUI extends JFrame implements ActionListener, MouseListener {
     private GridBagConstraints gbc = new GridBagConstraints();
 
     private ArrayList<Student> students = new ArrayList<>();
-    private int lastRow = -1;
+    private int lastRow = 0;
+
+    public static GUI instance;
+
+    public static synchronized GUI getInstance() {
+        if (instance == null) {
+            instance = new GUI("Student");
+        }
+        return instance;
+    }
 
     public GUI(String title) {
         super(title);
@@ -138,11 +145,21 @@ public class GUI extends JFrame implements ActionListener, MouseListener {
         this.setSize(600, 500);
         this.pack();
         this.setLocationRelativeTo(null);
-
+        this.setVisible(true);
     }
 
-    public void showDataGetAll() throws SQLException {
+    public void showDataGetAll() {
         students = StudentDAO.getInstance().getAll();
+
+        if (students == null) {
+            return;
+        }
+
+        if (students.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Khong co du lieu", "Thong bao", 1);
+            return;
+        }
+
         String[] columnNames = { "Ma SV", "Ho va ten", "Tuoi", "So dien thoai", "Dia chi" };
         String[][] data = new String[students.size()][columnNames.length];
 
@@ -157,7 +174,11 @@ public class GUI extends JFrame implements ActionListener, MouseListener {
         DefaultTableModel model = new DefaultTableModel(data, columnNames);
         table.setModel(model);
 
-        showDataToField(0);
+        try {
+            showDataToField(lastRow);
+        } catch (IndexOutOfBoundsException e) {
+            showDataToField(0);
+        }
     }
 
     public String[] getDataClicked(int rowID) {
@@ -183,22 +204,78 @@ public class GUI extends JFrame implements ActionListener, MouseListener {
         cAddress.select(student[4]);
     }
 
+    public Student getStudent(String option) {
+        if (tfFullName.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Ho ten khong duoc de trong", "Thong bao", 1);
+            return null;
+        }
+
+        if (tfAge.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Tuoi khong duoc de trong", "Thong bao", 1);
+            return null;
+        }
+
+        if (tfPhoneNumber.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "So dien thoai khong duoc de trong", "Thong bao", 1);
+            return null;
+        }
+        if (option != "custom") {
+            return new Student(
+                    Integer.parseInt(tfID.getText()),
+                    tfFullName.getText(),
+                    Integer.parseInt(tfAge.getText()),
+                    tfPhoneNumber.getText(),
+                    cAddress.getSelectedItem());
+        } else {
+            return new Student(
+                    tfFullName.getText(),
+                    Integer.parseInt(tfAge.getText()),
+                    tfPhoneNumber.getText(),
+                    cAddress.getSelectedItem());
+
+        }
+    }
+
+    public void saveDataToDB() {
+        Student student = getStudent("");
+        if (student == null) {
+            return;
+        }
+        StudentDAO.getInstance().update(student);
+    }
+
+    public void addNewStudent() {
+        Student student = getStudent("custom");
+        if (student == null) {
+            return;
+        }
+        StudentDAO.getInstance().insert(student);
+
+    }
+
+    public void deleteStudent() {
+        Student student = getStudent("");
+        if (student == null) {
+            return;
+        }
+        StudentDAO.getInstance().delete(student);
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
-        try {
-            Object source = e.getSource();
-            if (source == btnLoad) {
-                System.out.println("load");
-                showDataGetAll();
-            } else if (source == btnAdd) {
-                System.out.println("add");
-            } else if (source == btnSave) {
-                System.out.println("save");
-            } else if (source == btnDelete) {
-                System.out.println("delete");
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+        Object source = e.getSource();
+        if (source == btnLoad) {
+            System.out.println("load");
+            showDataGetAll();
+        } else if (source == btnAdd) {
+            System.out.println("add");
+            addNewStudent();
+        } else if (source == btnSave) {
+            System.out.println("save");
+            saveDataToDB();
+        } else if (source == btnDelete) {
+            System.out.println("delete");
+            deleteStudent();
         }
     }
 

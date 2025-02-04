@@ -4,7 +4,11 @@ import java.awt.*;
 import java.awt.event.*;
 
 class NewFrame extends Frame {
-    private Button button;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private Button button;
     private Dialog dialog;
     private TextField textField;
     private GridBagConstraints gbc = new GridBagConstraints();
