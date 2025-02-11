@@ -6,17 +6,18 @@ import javax.swing.JOptionPane;
 
 public class DataSource {
     private String url = "jdbc:mysql://localhost:3306/test";
+    private String url2 = "jdbc:mysql://localhost:3306/java";
     private String username = "root";
     private String password = "";
 
     private static DataSource instance;
 
-    public DataSource() {
+    private DataSource() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(GUI.getInstance(), "Khong the nap Driver", "Thong bao", 1);
+            JOptionPane.showMessageDialog(null, "Khong the nap Driver", "Thong bao", 2);
         }
     }
 
@@ -32,7 +33,17 @@ public class DataSource {
             return DriverManager.getConnection(url, username, password);
         } catch (SQLException e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(GUI.getInstance(), "Khong the ket noi CSDL", "Thong bao", 1);
+            JOptionPane.showMessageDialog(null, "Khong the ket noi CSDL", "Thong bao", 2);
+            return null;
+        }
+    }
+
+    public Connection getConn() {
+        try {
+            return DriverManager.getConnection(url2, username, password);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Khong the ket noi CSDL", "Thong bao", 2);
             return null;
         }
     }
@@ -53,7 +64,7 @@ public class DataSource {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(GUI.getInstance(), "Co loi khi dong tai nguyen", "Thong bao", 1);
+            JOptionPane.showMessageDialog(null, "Co loi khi dong tai nguyen", "Thong bao", 0);
         }
     }
 }

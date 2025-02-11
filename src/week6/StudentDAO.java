@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
-@SuppressWarnings("unused")
 public class StudentDAO {
     private Connection conn = null;
     private ResultSet rs = null;
