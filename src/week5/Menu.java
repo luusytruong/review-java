@@ -6,7 +6,9 @@ import java.awt.event.*;
 
 @SuppressWarnings("unused")
 public class Menu extends JFrame {
-    public Menu(String title) {
+    private static final long serialVersionUID = 1L;
+
+	public Menu(String title) {
         super(title);
         initComponents();
     }

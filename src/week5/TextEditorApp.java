@@ -6,7 +6,8 @@ import java.awt.*;
 import javax.swing.*;
 
 public class TextEditorApp extends JFrame implements ActionListener {
-    private TextField tf1;
+    private static final long serialVersionUID = 1L;
+	private TextField tf1;
     private Button btn1;
     private TextArea ta;
 

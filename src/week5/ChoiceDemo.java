@@ -6,7 +6,8 @@ import javax.swing.*;
 
 @SuppressWarnings("unused")
 public class ChoiceDemo extends JFrame {
-    private Choice choice;
+    private static final long serialVersionUID = 1L;
+	private Choice choice;
     private Label lb;
     private Color color;
 

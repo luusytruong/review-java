@@ -18,6 +18,8 @@ import javax.swing.border.TitledBorder;
  */
 public class View extends JFrame{
 
+	private static final long serialVersionUID = 1L;
+
 	public View() {
 		// Create views swing UI components 
                 super("Swing MVC Demo");

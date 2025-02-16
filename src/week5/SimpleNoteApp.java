@@ -9,7 +9,8 @@ import java.awt.*;
 import javax.swing.*;
 
 public class SimpleNoteApp extends JFrame implements ActionListener {
-    private Label lb;
+    private static final long serialVersionUID = 1L;
+	private Label lb;
     private TextArea ta;
     private Button btnSave, btnClear;
 

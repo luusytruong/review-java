@@ -8,7 +8,9 @@ import java.awt.*;
 // import java.awt.event.*;
 
 public class CombinateExam extends JFrame {
-    public CombinateExam(String title) {
+    private static final long serialVersionUID = 1L;
+
+	public CombinateExam(String title) {
         super(title);
         initComponents();
     }

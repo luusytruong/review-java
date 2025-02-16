@@ -6,7 +6,8 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class ListDemo extends JFrame implements ActionListener, ItemListener {
-    private List list1;
+    private static final long serialVersionUID = 1L;
+	private List list1;
     private Button btn1;
     private Label lbShow;
     // private Font font = new Font("Inter", Font.PLAIN, 14);

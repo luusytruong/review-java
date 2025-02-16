@@ -8,7 +8,8 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 public class GUI extends JFrame implements ActionListener, MouseListener {
-    private JTable table;
+    private static final long serialVersionUID = 1L;
+	private JTable table;
     private JTextField tfID, tfFullName, tfAge, tfPhoneNumber;
     private Choice cAddress;
     private JButton btnLoad, btnSave, btnAdd, btnDelete;

@@ -19,7 +19,8 @@ class NumberFilter extends KeyAdapter {
 }
 
 public class View extends JFrame {
-    private JTable table;
+    private static final long serialVersionUID = 1L;
+	private JTable table;
     private JButton btnAdd, btnEdit, btnDelete;
     private JTextField txtId, txtName, txtPrice, txtStock;
 
