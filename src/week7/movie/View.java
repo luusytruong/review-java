@@ -7,7 +7,8 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 public class View extends JFrame {
-    private JTable table;
+    private static final long serialVersionUID = -6372762874186012403L;
+	private JTable table;
     private JTextField tfId, tfTitle, tfDirector, tfYear;
     private JComboBox<String> cbType;
     private JButton btnInsert, btnUpdate, btnDelete;
@@ -106,13 +107,6 @@ public class View extends JFrame {
         tfYear.setText(movie[3].toString());
         cbType.setSelectedItem(movie[4].toString());
     }
-    // public void setDataToField(Movie movie) {
-    // tfId.setText(Integer.toString(movie.getId()));
-    // tfTitle.setText(movie.getTitle());
-    // tfDirector.setText(movie.getDirector());
-    // tfYear.setText(movie.getYear());
-    // cbType.setSelectedItem(movie.getType());
-    // }
 
     public Movie getMovie() {
         if (tfTitle.getText().isBlank()) {

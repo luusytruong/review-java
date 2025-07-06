@@ -20,7 +20,8 @@ import javax.swing.event.ListSelectionListener;
  */
 public class SinhVienView2 extends JFrame {
 
-    JButton btnThem, btnSua, btnXoa, btnClear;
+    private static final long serialVersionUID = 1L;
+	JButton btnThem, btnSua, btnXoa, btnClear;
     JTextField txtID, txtHoten, txtDiachi, txtLop, txtNamsinh;
     JScrollPane tblPane;
     Panel southPane, textPane, buttonPane;
